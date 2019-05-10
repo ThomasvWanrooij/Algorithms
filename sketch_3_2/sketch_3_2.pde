@@ -1,3 +1,5 @@
+//Made by Robin Venhuizen and Thomas van Wanrooij, 2019
+
 PVector pos;
 PVector speed;
 PVector gravity;
@@ -41,5 +43,4 @@ void draw() {
   rect(posX-5, posY-10, 10, 45);
   fill(193, 94, 64);
   rect(posX-5, posY+15, 10, 45);
-  //line(posX-5,posY+15,posX+5,posY+15);
 }

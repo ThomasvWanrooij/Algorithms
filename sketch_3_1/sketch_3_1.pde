@@ -1,3 +1,5 @@
+//Made by Robin Venhuizen and Thomas van Wanrooij, 2019
+
 PVector pos;
 PVector speed;
 PVector gravity;
