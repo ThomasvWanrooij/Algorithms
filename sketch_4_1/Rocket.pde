@@ -27,4 +27,10 @@ class Rocket {
     rocketPos.add(speed); 
     image(img, rocketPos.x, rocketPos.y, 75, 131);
   }
+
+  void reset() {
+    rocketPos.y = height-65;
+    speed = new PVector(0, 0);
+    accel = new PVector(0, -0.2);
+  }
 }
