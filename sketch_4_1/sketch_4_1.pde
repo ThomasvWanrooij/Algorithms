@@ -1,3 +1,4 @@
+//Made by Robin Venhuizen and Thomas van Wanrooij, 2019
 PImage img;
 Rocket rocket1;
 
