@@ -1,9 +1,5 @@
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// Boid class
-// Methods for Separation, Cohesion, Alignment added
+// Methods for Separation, Cohesion, Alignment
+// Avoid added by Robin Venhuizen and Thomsa van Wanrooij, 2019
 
 class Boid {
 
@@ -35,7 +31,7 @@ class Boid {
     obstacle();
   }
 
-  void obstacle() {
+  void obstacle() { // draw the buoy
     fill(255, 0, 0);
     stroke(1);
     ellipse(obstacle.x, obstacle.y, obstsize, obstsize);
@@ -112,7 +108,7 @@ class Boid {
     popMatrix();
   }
 
-  // Wraparound
+  // bounce
   void borders() {
     if (position.x < -r || position.x > width+r) { 
       velocity.x = velocity.x * -1;
@@ -157,6 +153,7 @@ class Boid {
     return steer;
   }
 
+  //code used to avoid the buoy
   PVector avoid (ArrayList<Boid> boids) {
     float separation = obstsize+50+10.0f;
     PVector steer = new PVector(0, 0, 0);
