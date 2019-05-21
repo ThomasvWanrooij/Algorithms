@@ -21,7 +21,7 @@ class Boid {
     acceleration = new PVector(0, 0);
     velocity = new PVector(random(-1, 1), random(-1, 1));
     position = new PVector(x, y);
-    obstacle = new PVector(100, 600);
+    obstacle = new PVector(300, 600);
     r = 3.0;
     maxspeed = 3;
     maxforce = 0.05;
@@ -39,6 +39,14 @@ class Boid {
     fill(255, 0, 0);
     stroke(1);
     ellipse(obstacle.x, obstacle.y, obstsize, obstsize);
+    strokeWeight(5);
+    stroke(255);
+    line(obstacle.x-obstsize/4-2, obstacle.y-obstsize/4-2, obstacle.x+obstsize/4+2, obstacle.y+obstsize/4+2);
+    line(obstacle.x+obstsize/4+2, obstacle.y-obstsize/4-2, obstacle.x-obstsize/4-2, obstacle.y+obstsize/4+2);
+    strokeWeight(1);
+    fill(0,119,190);
+    stroke(0);
+    ellipse(obstacle.x,obstacle.y,obstsize/1.8,obstsize/1.8);
   }
 
   void applyForce(PVector force) {
@@ -51,14 +59,17 @@ class Boid {
     PVector sep = separate(boids);   // Separation
     PVector ali = align(boids);      // Alignment
     PVector coh = cohesion(boids);   // Cohesion
+    PVector avo = avoid(boids);      //avoid
     // Arbitrarily weight these forces
     sep.mult(1.5);
     ali.mult(1.0);
     coh.mult(1.0);
+    avo.mult(1.5);
     // Add the force vectors to acceleration
     applyForce(sep);
     applyForce(ali);
     applyForce(coh);
+    applyForce(avo);
   }
 
   // Method to update position
@@ -146,8 +157,8 @@ class Boid {
     return steer;
   }
 
-  PVector obstacle (ArrayList<Boid> boids) {
-    float separation = 10.0f;
+  PVector avoid (ArrayList<Boid> boids) {
+    float separation = obstsize+50+10.0f;
     PVector steer = new PVector(0, 0, 0);
     int count = 0;
     // For every boid in the system, check if it's too close
@@ -156,7 +167,7 @@ class Boid {
       // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
       if ((obstdist > 0) && (obstdist < separation)) {
         // Calculate vector pointing away from neighbor
-        PVector diff = PVector.sub(position, other.position);
+        PVector diff = PVector.sub(position, obstacle);
         diff.normalize();
         diff.div(obstdist);        // Weight by distance
         steer.add(diff);
@@ -207,7 +218,7 @@ class Boid {
   // Cohesion
   // For the average position (i.e. center) of all nearby boids, calculate steering vector towards that position
   PVector cohesion (ArrayList<Boid> boids) {
-    float neighbordist = 45;
+    float neighbordist = 30;
     PVector sum = new PVector(0, 0);   // Start with empty vector to accumulate all positions
     int count = 0;
     for (Boid other : boids) {
