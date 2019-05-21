@@ -9,8 +9,8 @@ class Particle {
   int num;
 
   Particle(PVector l) {
-    acceleration = new PVector(0, 0.05);
-    velocity = new PVector(random(-1, 1), random(-2, 0));
+    acceleration = new PVector(0, 0.2);
+    velocity = new PVector(random(-4, 4), random(-5, 0));
     position = l.copy();
     lifespan = 255.0;
     num = int(random(0, 3));
