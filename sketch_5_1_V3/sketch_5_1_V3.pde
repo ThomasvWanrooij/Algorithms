@@ -6,12 +6,14 @@
 // See: http://www.red3d.com/cwr/
 // Rules: Cohesion, Separation, Alignment
 
-// Click mouse to add boids into the system
+//Adapted to bounce at walls and avoid a buoy 
+//By Robin Venhuizen and Thomas van Wanrooij, 2019
+
 
 Flock flock;
 
 void setup() {
-  size(640,360);
+  size(800,800, P2D);
   flock = new Flock();
   // Add an initial set of boids into the system
   for (int i = 0; i < 200; i++) {

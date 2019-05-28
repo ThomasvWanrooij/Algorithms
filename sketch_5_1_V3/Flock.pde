@@ -1,9 +1,7 @@
+// Original code used from:
 // The Nature of Code
 // Daniel Shiffman
 // http://natureofcode.com
-
-// Flock class
-// Does very little, simply manages the ArrayList of all the boids
 
 class Flock {
   ArrayList<Boid> boids; // An ArrayList for all the boids
@@ -21,5 +19,4 @@ class Flock {
   void addBoid(Boid b) {
     boids.add(b);
   }
-
 }
