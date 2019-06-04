@@ -2,7 +2,6 @@ Ball [] balls1 = new Ball[11];
 
 void setup() {
   size(800, 800);
-  background(0);
   smooth();
   for (int i = 0; i<=5; i++) {
     balls1[i] = new Ball(0.5*i, 800-80*i);
@@ -13,9 +12,7 @@ void setup() {
 }
 
 void draw() {
-
-  fill(0, 50);
-  rect(0, 0, width, height);
+  background(0);
   for (int i = 0; i < 11; i++) {
     balls1[i].display();
   }
