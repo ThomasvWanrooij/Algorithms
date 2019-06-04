@@ -1,3 +1,5 @@
+//Robin Venhuizen and Thomas van Wanrooij, 2019
+
 Ball [] balls1 = new Ball[11];
 
 void setup() {

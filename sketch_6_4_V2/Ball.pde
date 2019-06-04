@@ -1,3 +1,5 @@
+//Robin Venhuizen and Thomas van Wanrooij, 2019
+
 class Ball {
 
   float yPos = 0;
