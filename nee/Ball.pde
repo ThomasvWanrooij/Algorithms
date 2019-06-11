@@ -13,16 +13,25 @@ class Ball {
   float right;
   float left;
 
+
   Ball(float initX) {
     xPos = initX;
   }
+  void update() {
+    display();
+    calculate();
+   // velocity = right;
+  }
 
-  void display() {
+
+  void calculate() {
     force = -constant * (yPos-height/2);
     accel = force/mass;
-    velocity = fDamp* (velocity + accel);
+    velocity = fDamp * (velocity + accel);
     yPos += velocity;
+  }
 
+  void display() {
     fill(64, 164, 223);
     noStroke();
     ellipse(xPos, yPos, 10, 10);

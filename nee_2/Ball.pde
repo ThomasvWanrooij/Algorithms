@@ -30,6 +30,6 @@ class Ball {
 
 
   void mouse() {
-    velocity = 120;
+    force = 120;
   }
 }
