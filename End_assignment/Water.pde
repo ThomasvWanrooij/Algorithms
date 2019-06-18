@@ -1,6 +1,6 @@
 //Robin Venhuizen and Thomas van Wanrooij, 2019
 
-class Ball {
+class Water {
 
   float yPos = height/2; // starting position
   float mass = 25; // starting mass
@@ -14,7 +14,7 @@ class Ball {
   float left;
   float neighbourForce;
 
-  Ball(float initX) {
+  Water(float initX) {
     xPos = initX;
   }
 
@@ -23,13 +23,13 @@ class Ball {
     accel = -force/mass;
     velocity += accel;
     yPos += velocity;
-    
-    force = fDamp * velocity + constant * (yPos-height/2); //sum force to calculate total force
+    force = fDamp * velocity + constant * (yPos-height/2) + (randomGaussian()-randomGaussian()); //sum force to calculate total force
 
     // Drawing of ellipses
-    fill(64, 164, 223);
-    noStroke();
-    ellipse(xPos, yPos, 10, 10);
+    strokeWeight(7);
+    stroke(0,51,102, 200);
+    line(xPos,yPos,xPos,height);
+    strokeWeight(1);
   }
 
   // Add a new starting force to reset the effect when droplets have reached standstill
