@@ -1,23 +1,23 @@
-class  ParticleSystem{
+// Create an ArrayList of particles
+// Robin Venhuizen and Thomas van Wanrooij, 2019
+
+class  ParticleSystem {
   Particle particle;
   ArrayList<Particle> particles;
-  PVector speed;
-  PVector accel;
+
 
   ParticleSystem() {
     particles = new ArrayList<Particle>();
-    //rocketPos = new PVector(width/2, height-65);
-    speed = new PVector(0, 0);
-    accel = new PVector(0, -0.2);
   }
 
+  // Runs the particle system
   void run() {
-    particles.add(new Particle(new PVector(boat.boatPos.x-95, boat.boatPos.y+47)));
+    particles.add(new Particle(new PVector(boat.boatPos.x-95, boat.boatPos.y+47))); // Add new particle 
 
-    for (int i = particles.size()-1; i >= 0; i--) {
+    for (int i = particles.size()-1; i >= 0; i--) { // Gets particle at index i and if its lifespan is over, it is removed
       Particle particle = particles.get(i);
-      particle.display();
-      if (particle.alive()) {
+      particle.run();
+      if (particle.timeUp()) {
         particles.remove(i);
       }
     }

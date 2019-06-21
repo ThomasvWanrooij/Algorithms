@@ -1,17 +1,11 @@
-// Class of boids that behave according to their neighbours' position and speed, 
-// and adjust theirs accordingly to match the behaviour of a school of fish.
-// Furthermore, the boids avoid the boat.
-// Original code used from:
 // Methods for Separation, Cohesion, Alignment
-// The Nature of Code, Daniel Shiffman. http://natureofcode.com
-// Avoid method added by Robin Venhuizen and Thomas van Wanrooij, 2019
+// Avoid added by Robin Venhuizen and Thomsa van Wanrooij, 2019
 
 class Boid {
-
   PVector position;
   PVector velocity;
   PVector acceleration;
-
+  PVector boatVector;
   float maxforce;    // Maximum steering force
   float maxspeed;    // Maximum speed
   PVector obstacle;
@@ -23,16 +17,31 @@ class Boid {
     velocity = new PVector(random(-1, 1), random(-1, 1));
     position = new PVector(x, y);
     obstacle = new PVector(300, 600);
+    boatVector = new PVector(boat.boatPos.x,boat.boatPos.y); 
     maxspeed = 3;
     maxforce = 0.05;
   }
 
-  //Runs methods of the boids
   void run(ArrayList<Boid> boids) {
     flock(boids);
     update();
     borders();
     render();
+    obstacle();
+  }
+
+  void obstacle() { // draw the buoy
+    //fill(255, 0, 0);
+    //stroke(1);
+    //ellipse(obstacle.x, obstacle.y, obstsize, obstsize);
+    //strokeWeight(5);
+    //stroke(255);
+    //line(obstacle.x-obstsize/4-2, obstacle.y-obstsize/4-2, obstacle.x+obstsize/4+2, obstacle.y+obstsize/4+2);
+    //line(obstacle.x+obstsize/4+2, obstacle.y-obstsize/4-2, obstacle.x-obstsize/4-2, obstacle.y+obstsize/4+2);
+    //strokeWeight(1);
+    //fill(0,119,190);
+    //stroke(0);
+    //ellipse(obstacle.x,obstacle.y,obstsize/1.8,obstsize/1.8);
   }
 
   void applyForce(PVector force) {
@@ -145,10 +154,10 @@ class Boid {
 
   //code used to avoid the buoy  
   PVector avoid (ArrayList<Boid> boids) {
-    float separation = 150f;
+    float separation = 250f;
     PVector steer = new PVector(0, 0, 0);
     int count = 0;
-
+    
     // For every boid in the system, check if it's too close
     for (Boid other : boids) {
       float obstdist = PVector.dist(boatVector, position);
@@ -177,7 +186,7 @@ class Boid {
     }
     return steer;
   }
-
+  
   // Alignment
   // For every nearby boid in the system, calculate the average velocity
   PVector align (ArrayList<Boid> boids) {

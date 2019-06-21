@@ -1,6 +1,4 @@
-// Create a water column with an applied MSD system
-// Gaussian random function is used to create a dynamic water surface
-// Robin Venhuizen and Thomas van Wanrooij, 2019
+//Robin Venhuizen and Thomas van Wanrooij, 2019
 
 class Water {
 
@@ -12,28 +10,32 @@ class Water {
   float accel;
   float xPos;
   float fDamp = 0.99; //Dampening coefficient 
+  float right;
+  float left;
   float neighbourForce;
   float initialY;
 
   Water(float initX) {
+    //initialY = initY;
     xPos = initX;
+    //yPos = initY;
   }
 
-  // MSD system according to block scheme provided
   void MSD() {    
+    //MSD system according to block scheme provideed
     accel = -force/mass;
     velocity += accel;
     yPos += velocity;
-    force = fDamp * velocity + constant * (yPos-height/2) + (randomGaussian()-randomGaussian()); // Sum force to calculate total force
+    force = fDamp * velocity + constant * (yPos-height/2) + (randomGaussian()-randomGaussian()); //sum force to calculate total force
 
-    // Drawing of columns
+    // Drawing of ellipses
     strokeWeight(7);
     stroke(0,51,102, 200);
     line(xPos,yPos,xPos,height);
     strokeWeight(1);
   }
 
-  // Apply a force to the water columns when the mouse is clicked, to simulate the boat splashing into the water
+  // Add a new starting force to reset the effect when droplets have reached standstill
   void mouse() {
     force = 500;
   }
