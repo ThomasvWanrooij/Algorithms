@@ -1,40 +1,39 @@
 //Boat image taken from: https://www.kisspng.com/png-motor-boats-ship-clip-art-boat-749436/
 class Boat {
 
-  float xPos;
-  float yPos;
-  float ySpeed;
-  float xSpeed;
+  ParticleSystem waterdrops;
+  PVector boatPos;
+  PVector boatSpeed;
   float initialY;
   float initialX;
 
   Boat(float initX, float initY) {
     initialY = initY;
     initialX = initX;
-    xPos = initX;
-    yPos = initY;
+    boatPos  = new PVector(initX, initY);
+    boatSpeed  = new PVector();
     boatImg = loadImage("boat2.png");
+    waterdrops = new ParticleSystem();
   }
 
   void display() {
     noStroke();
     fill(255, 0, 0);
-    yPos += ySpeed;
-    xPos += xSpeed;
+    boatPos.add(boatSpeed);
+    println(boatPos);
     imageMode(CENTER);
-    image(boatImg,xPos,yPos);
+    image(boatImg, boatPos.x, boatPos.y);
+    waterdrops.run();
   }
 
   void click() {
-    ySpeed = 20;
+    boatSpeed.y = 20;
   }
 
   void reset() {
-    if (xPos > width-20) {
-      xPos = initialX;
-      xSpeed = 0;
-      yPos = initialY;
-      ySpeed = 0;
+    if (boatPos.x > width-20) {
+      boatPos.set(initialX, initialY);
+      boatSpeed.set(0, 0);
       floating = false;
     }
   }

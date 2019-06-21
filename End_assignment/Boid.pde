@@ -18,7 +18,7 @@ class Boid {
     velocity = new PVector(random(-1, 1), random(-1, 1));
     position = new PVector(x, y);
     obstacle = new PVector(300, 600);
-    boatVector = new PVector(boat.xPos,boat.yPos); 
+    boatVector = new PVector(boat.boatPos.x,boat.boatPos.y); 
  //   r = 3.0;
     maxspeed = 3;
     maxforce = 0.05;

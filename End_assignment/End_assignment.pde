@@ -13,11 +13,11 @@ PImage floorbg;
 
 void setup() {
   size(800, 800); //Window size
+  smooth(); //adds anti aliasing
   sky = loadImage("sky.jpg");
   floorfg = loadImage("floorfg.png");
   floorbg = loadImage("floorbg.png");
 
-  smooth(); // Smoothens the visual appearance
   boat = new Boat(width/2, 300); 
   for (int i = 0; i<water.length; i++) {
     water[i] = new Water(7*i-5);
@@ -48,13 +48,13 @@ void draw() {
     water[i].neighbourForce =  ((water[i].yPos - water[i-1].yPos) + (water[i].yPos - water[i+1].yPos)) *water[i].constant; //Calculate the difference in height from both neighbouring water
     water[i].force += water[i].neighbourForce; // Update the force with the info calculated from its neighbours
 
-    if (boat.yPos > water[int(ballChoice)].yPos) {
+    if (boat.boatPos.y > water[int(ballChoice)].yPos) {
       floating = true;
     }
     if (floating == true) {
-      boat.yPos = water[int(ballChoice)].yPos-40;
-      boat.ySpeed = 0;
-      boat.xSpeed = 1;
+      boat.boatPos.y = water[int(ballChoice)].yPos-40;
+      boat.boatSpeed.y = 0;
+      boat.boatSpeed.x = 1;
     }
     if (int(ballChoice) > water.length) {
       boat.reset();
@@ -64,7 +64,7 @@ void draw() {
 }
 
 void mouseClicked() {
-  ballChoice = map(boat.xPos, 0, width, 0, water.length);
+  ballChoice = map(boat.boatPos.x, 0, width, 0, water.length);
   for (int i = 0; i < water.length; i++) {
     water[int(ballChoice)].mouse(); // Update middle ball with the new force to restart effect
     water[int(ballChoice)+1].mouse(); // Update one right of the middle ball with the new force to restart effect
@@ -79,6 +79,6 @@ void boat() {
   boat.display();
   boat.reset();
   if (floating == false) {
-    boat.xPos = mouseX;
+    boat.boatPos.x = mouseX;
   }
 }
