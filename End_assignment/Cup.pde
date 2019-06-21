@@ -1,6 +1,7 @@
 // Display and move a Starbucks cup image to represent trash in the ocean.
 // #SaveTheTurtles
 // Robin Venhuizen and Thomas van Wanrooij, 2019
+// Original image taken from: https://www.amazon.in/Grande-16oz-Starbucks-Cold-Cup/dp/B0029DDJEK
 
 class Cup {
   PImage cup;
