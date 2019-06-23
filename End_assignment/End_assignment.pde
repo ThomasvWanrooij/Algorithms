@@ -17,7 +17,6 @@ Ocean ocean;
 Cup cup;
 
 boolean floating;
-PVector boatVector;
 
 void setup() {
   size(800, 800); // Window size

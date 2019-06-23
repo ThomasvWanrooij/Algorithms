@@ -4,25 +4,24 @@
 // Original code used from:
 // Methods for Separation, Cohesion, Alignment
 // The Nature of Code, Daniel Shiffman. http://natureofcode.com
-// Avoid method added by Robin Venhuizen and Thomas van Wanrooij, 2019
+// Avoid added by Robin Venhuizen and Thomas van Wanrooij, 2019
 
 class Boid {
 
   PVector position;
   PVector velocity;
   PVector acceleration;
+  PVector boatPos;
 
   float maxforce;    // Maximum steering force
   float maxspeed;    // Maximum speed
-  PVector obstacle;
   float obstdist;
-  float obstsize = 30;
 
   Boid(float x, float y) {
     acceleration = new PVector(0, 0);
     velocity = new PVector(random(-1, 1), random(-1, 1));
     position = new PVector(x, y);
-    obstacle = new PVector(300, 600);
+    boatPos = new PVector(0,0);
     maxspeed = 3;
     maxforce = 0.05;
   }
@@ -36,7 +35,6 @@ class Boid {
   }
 
   void applyForce(PVector force) {
-    // We could add mass here if we want A = F / M
     acceleration.add(force);
   }
 
@@ -148,14 +146,15 @@ class Boid {
     float separation = 150f;
     PVector steer = new PVector(0, 0, 0);
     int count = 0;
+    boatPos.set(boat.boatPos.x,boat.boatPos.y);
 
     // For every boid in the system, check if it's too close
     for (Boid other : boids) {
-      float obstdist = PVector.dist(boatVector, position);
+      float obstdist = PVector.dist(boatPos, position);
       // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
       if ((obstdist > 0) && (obstdist < separation)) {
         // Calculate vector pointing away from neighbor
-        PVector diff = PVector.sub(position, boatVector);
+        PVector diff = PVector.sub(position, boatPos);
         diff.normalize();
         diff.div(obstdist);        // Weight by distance
         steer.add(diff);

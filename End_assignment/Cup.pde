@@ -29,6 +29,7 @@ class Cup {
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(noise(toff)*5);
+    imageMode(CENTER);
     image(cup, 0, 0, 68, 120);
     popMatrix();
   }

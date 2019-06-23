@@ -13,7 +13,6 @@ class Water {
   float xPos;
   float fDamp = 0.99; //Dampening coefficient 
   float neighbourForce;
-  float initialY;
 
   Water(float initX) {
     xPos = initX;

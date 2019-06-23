@@ -8,12 +8,10 @@ class Boat {
   ParticleSystem waterdrops;
   PVector boatPos;
   PVector boatSpeed;
-  float initialY;
-  float initialX;
+  PVector initial;
 
   Boat(float initX, float initY) {
-    initialY = initY;
-    initialX = initX;
+    initial = new PVector(initX,initY);
     boatPos  = new PVector(initX, initY);
     boatSpeed  = new PVector();
     boatImg = loadImage("boat2.png");
@@ -34,7 +32,6 @@ class Boat {
     boatPos.add(boatSpeed); //Velocity is added to move the boat forward
     imageMode(CENTER);
     image(boatImg, boatPos.x, boatPos.y);
-    boatVector = boatPos;
   }
 
   //Drops the boat down upon click
@@ -56,7 +53,7 @@ class Boat {
   // The position of the boat is reset when on the edge of the screen
   void reset() {
     if (boatPos.x > width-20) {
-      boatPos.set(initialX, initialY);
+      boatPos.set(initial.x, initial.y);
       boatSpeed.set(0, 0);
       floating = false;
     }
