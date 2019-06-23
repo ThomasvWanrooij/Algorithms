@@ -24,12 +24,12 @@ void setup() {
   sky = loadImage("sky.jpg");
   floorfg = loadImage("floorfg.png");
   floorbg = loadImage("floorbg.png");
-  
+
   boat = new Boat(width/2, 333);
   flock = new Flock();
   ocean = new Ocean();
   cup = new Cup();
-  
+
   // Add an initial set of boids into the system
   for (int i = 0; i < 100; i++) {
     Boid b = new Boid(width/2, height);
