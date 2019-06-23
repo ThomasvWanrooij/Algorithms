@@ -16,8 +16,6 @@ Flock flock;
 Ocean ocean;
 Cup cup;
 
-boolean floating;
-
 void setup() {
   size(800, 800); // Window size
   smooth(); // Add anti aliasing

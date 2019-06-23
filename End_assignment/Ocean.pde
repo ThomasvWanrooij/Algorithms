@@ -23,16 +23,16 @@ class Ocean {
 
     // Checks if the boat is at or below water level
     if (boat.boatPos.y >= water[int(columnChoice)].yPos) {
-      floating = true;
+      boat.floating = true;
     }
-    if (floating == true) { // When at or below water level, boat starts moving to the right.
+    if (boat.floating == true) { // When at or below water level, boat starts moving to the right.
       boat.boatPos.y = water[int(columnChoice)].yPos-40; // Boat height in screen follows the height of the water, -40 is a correction for the size of the image.
       boat.boatSpeed.y = 0;
       boat.boatSpeed.x = 1; // Add horizontal speed
     }
     if (int(columnChoice) > water.length) { // When the boat reaches the edge of the water, its reset function is called.
       boat.reset();
-      floating = false;
+      boat.floating = false;
     }
   }
 
@@ -41,7 +41,7 @@ class Ocean {
     // Map the boat's x-position to one of the columns of water. 
     // The boat follows the position of the initial column it is above, to create a smoother effect than when it follows the position of the column it is actually above when moving
     columnChoice = map(boat.boatPos.x, -40, width+140, 0, water.length); 
-    if (!floating) {
+    if (!boat.floating) {
       for (int i = 0; i < water.length; i++) {
         water[int(columnChoice)].mouse(); // Update column below the boat with the new force to restart effect
         water[int(columnChoice)+1].mouse(); // Update one right of the chosen column with the new force to restart effect

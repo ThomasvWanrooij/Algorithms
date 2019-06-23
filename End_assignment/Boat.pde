@@ -9,6 +9,7 @@ class Boat {
   PVector boatPos;
   PVector boatSpeed;
   PVector initial;
+  boolean floating;
 
   Boat(float initX, float initY) {
     initial = new PVector(initX,initY);
